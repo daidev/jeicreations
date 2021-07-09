@@ -1,0 +1,20 @@
+categories:
+  - slug: bookmark
+    name: bookmark
+    color: "#EDBCDD"
+    img: "/og_image.png"
+
+  - slug: pillow
+    name: pillow
+    color: "#e5db7e"
+    img: "/og_image.png"
+
+  - slug: nursery
+    name: nursery
+    color: "#3578E0"
+    img: "/og_image.png"
+
+  - slug: banner
+    name: banner
+    color: "#eef5f5"
+    img: "/og_image.png"

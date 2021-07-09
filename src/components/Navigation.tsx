@@ -1,92 +1,102 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Burger from "./Burger";
-import { useState } from "react";
+import { makeStyles, Typography } from "@material-ui/core";
+import clsx from 'clsx';
+import PenCircle from "../assets/pen-circle.svg";
+
+const useStyles = makeStyles({
+  nav: {
+    position: 'absolute',
+    padding: '20px',
+  },
+  list: {
+    margin: 0,
+    padding: 0,
+    listStyle: "none",
+  },
+  listItem: {
+    margin: "20px",
+    display: "inline-block",
+    cursor: "pointer",
+    zIndex: 1,
+    position: "relative",
+    '&:hover': {
+      '& > $circle': {
+        strokeDasharray: '180px 278px',
+        stroke: "#f4c8e4",
+        transition: 'stroke .25s ease .1s, stroke-dasharray .35s',
+      }
+    },
+  },
+  item: {
+    position: 'relative',
+    zIndex: 2,
+  },
+  active: {
+    '& > $circle': {
+      stroke: "#F2CEAE",
+      strokeDasharray: '180px 278px',  
+      transition: 'stroke .25s ease .1s, stroke-dasharray .35s',
+    }
+  },
+  circle: {
+    width: '100px',
+    height: '55px',
+    position: 'absolute',
+    zIndex: 0,
+    left: '50%',
+    top: '-100%',
+    transform: 'translate(-50%, 7px) translateZ(0)',
+    fill: 'none',
+    stroke: "#f4c8e4",
+    strokeLinecap: "round",
+    strokeWidth: '2px',
+    strokeDasharray: '69px 278px',
+    strokeDashoffset: '361px',
+    transition: 'stroke .25s ease .0s, stroke-dasharray .35s',
+  },
+});
 
 export default function Navigation() {
   const router = useRouter();
-  const [active, setActive] = useState(false);
+  const css = useStyles();
   return (
-    <>
-      <Burger active={active} onClick={() => setActive(!active)} />
-      <div className={"container " + (active ? "active" : "")}>
-        <ul>
-          <li>
-            <Link href="/">
-              <a className={router.pathname === "/" ? "active" : null}>about</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/posts">
-              <a
-                className={
-                  router.pathname.startsWith("/posts") ? "active" : null
-                }
-              >
-                blog
-              </a>
-            </Link>
-          </li>
-        </ul>
-        <style jsx>
-          {`
-            .container {
-              width: 0;
-            }
-            ul {
-              opacity: 0;
-              width: 100%;
-              height: 100vh;
-              text-align: right;
-              list-style: none;
-              margin: 0;
-              padding: 0;
-              position: fixed;
-              top: 0;
-              background-color: #fff;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              z-index: 1;
-              transform: translateY(100%);
-              transition: opacity 200ms;
-            }
-            .active ul {
-              opacity: 1;
-              transform: translateY(0);
-            }
-            li {
-              margin-bottom: 1.75rem;
-              font-size: 2rem;
-              padding: 0 1.5rem 0 0;
-            }
-            li:last-child {
-              margin-bottom: 0;
-            }
-            .active {
-              color: #222;
-            }
-
-            @media (min-width: 769px) {
-              .container {
-                width: 7rem;
-                display: block;
-              }
-              ul {
-                opacity: 1;
-                width: 7rem;
-                top: auto;
-                display: block;
-                transform: translateY(0);
-              }
-              li {
-                font-size: 1rem;
-                padding: 0;
-              }
-            }
-          `}
-        </style>
-      </div>
-    </>
+    <nav className={css.nav}>
+      <ul className={css.list}>
+        <li className={clsx(css.listItem, {[css.active]: router.pathname === "/" } )}>
+          <Link href="/" as="/">
+            <Typography
+              variant="body1"
+              className={css.item}
+            >
+              About
+            </Typography>
+          </Link>
+          <PenCircle className={css.circle}/>
+        </li>
+        <li className={clsx(css.listItem, {[css.active]: router.pathname.startsWith("/products") } )}>
+          <Link href="/products">
+            <Typography
+              variant="body1"
+              className={css.item}
+            >
+              Products
+            </Typography>
+          </Link>
+          <PenCircle className={css.circle}/>
+        </li>
+        <li className={clsx(css.listItem, {[css.active]: router.pathname.startsWith("/posts") } )}>
+          <Link href="/posts">
+            <Typography
+              variant="body1"
+              className={css.item}
+            >
+              Posts
+            </Typography>
+          </Link>
+          <PenCircle className={css.circle}/>
+        </li>
+      </ul>
+    </nav>
   );
 }

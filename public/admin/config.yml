@@ -69,6 +69,29 @@ collections:
               - label: "Introduction"
                 name: "introduction"
                 widget: "text"
+
+      - name: "categories"
+        label: "Categories"
+        file: "meta/categories.yml"
+        description: "Category descriptions"
+        fields:
+          - name: categories
+            label: Categories
+            label_singular: "Category"
+            widget: list
+            fields:
+              - label: "Slug"
+                name: "slug"
+                widget: "string"
+                hint: "The part of a URL identifies the category"
+              - label: "Name"
+                name: "name"
+                widget: "string"
+                hint: "First and Last"
+              - label: "Color"
+                name: "Color"
+                widget: "text"
+
       - name: "tags"
         label: "Tags"
         file: "meta/tags.yml"
@@ -136,6 +159,48 @@ collections:
           displayFields:
             - "tags.*.name"
           valueField: "tags.*.slug"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+
+  - name: "products"
+    label: "Products"
+    folder: "content/products/"
+    extension: "mdx"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{title}}"
+    fields:
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        dateFormat: "YYYY-MM-DD"
+        timeFormat: false
+      - label: Categories
+        label_singular: "Category"
+        name: "categories"
+        widget: list
+        summary: "{{fields.category}}"
+        field:
+          label: category
+          name: category
+          widget: relation
+          collection: "meta"
+          file: "categories"
+          searchFields:
+            - "categories.*.name"
+          displayFields:
+            - "categories.*.name"
+          valueField: "categories.*.slug"
       - label: "Body"
         name: "body"
         widget: "markdown"
