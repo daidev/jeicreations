@@ -4,13 +4,11 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import useCategories from '../hooks/useCategories';
-import useProductsList from '../hooks/useProductsList';
-import useProductsByCategory from '../hooks/useProductsByCategory';
 import CardStack, { Variant } from './CardStack';
 import Curvedcontainer from './CurvedContainer';
 import ProductFilters from './ProductFilters';
 import Loading from './Loading';
+import { getCategory } from '../lib/categories';
 
 const useStyles = makeStyles((theme) => ({
   rainbowText: {
@@ -106,15 +104,42 @@ const CategoryProducts = ({ color, name, products, index }) => {
   )
 }
 
-export default function ProductList({ filters }) {
+const useProductList = ({ products, selectedFilters }) => {
+  const filteredProducts = products.filter(({ categories }) => {
+    return !selectedFilters.category.length || 
+      categories.some(category => selectedFilters.category.includes(category));
+  });
+
+  console.log(selectedFilters, filteredProducts);
+
+  const productsByCategories = filteredProducts.reduce((acc, { categories, ...product }) => {
+    let result;
+    categories.forEach(category => {
+      result = {
+        ...acc,
+        [category]: [
+          ...acc[category] || [],
+          product,
+        ],
+      };  
+    });
+    return result;
+  }, {});
+
+  // const getCategory = (category) => categories.find(({ slug }) => slug === category);
+
+  return productsByCategories;
+}
+
+export default function ProductList({ products, categories }) {
+  const router = useRouter();
   const css = useStyles();
+  const filters = router.query as {};
   console.log({ filters });
-  const { pathname, push } = useRouter();
-  const [selectedFilters, setSelectedFilters] = useState(filters || INITIAL_FILTERS);
-  const { loading, products: productsByCategories } = useProductsByCategory(selectedFilters);
-  const { categories, loading: loadingCategories, getCategory } = useCategories(); 
   
-  console.log('PPP', productsByCategories);
+  const { pathname, push } = useRouter();
+  const [selectedFilters, setSelectedFilters] = useState({ ...INITIAL_FILTERS, ...filters });
+  const productsByCategories = useProductList({ products, selectedFilters });
 
   const handleUpdateFilters = (filterType, value) => {
     const filterValues = selectedFilters[filterType].split(',');
@@ -149,9 +174,7 @@ export default function ProductList({ filters }) {
         resetFilters={resetFilters}
       />
 
-      {loading || loadingCategories ? (
-        <Loading message="Geeting some fresh products ready for you" />
-      ) : Object.entries(productsByCategories).map(([category, products], index) => (
+      {Object.entries(productsByCategories).map(([category, products], index) => (
         <CategoryProducts
           {...getCategory(category)}
           key={category}
