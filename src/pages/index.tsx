@@ -144,13 +144,13 @@ const Categories = () => {
             <Grid item xs={12} md={6} key={name}>
               <Box p={2}>
                 <CardStack classNames={css.card} variant={Variant.FAN_LEFT} density={15}>
-                  <Image
+                  {/* <Image
                     height="332"
                     width="730"
                     src={img}
                     alt={name}
                     objectPosition="center"
-                  />
+                  /> */}
                   <Box p={0} marginTop={2}>
                     <Link href={{ pathname: 'products', query: { category: slug }}}>
                       <Typography

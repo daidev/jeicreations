@@ -19,7 +19,7 @@ export default function Index({ filters }) {
   );
 }
 
-export async function getServerSideProps({ query, ...rest }) {
+export async function getInitialProps({ query, ...rest }) {
   const queryParams = new URLSearchParams(query);
   const category = queryParams.getAll('category');
   const colors = queryParams.getAll('colors');

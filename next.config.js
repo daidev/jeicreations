@@ -1,4 +1,4 @@
-module.exports = ({
+module.exports = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       ...[
@@ -15,4 +15,5 @@ module.exports = ({
     );
     return config;
   },
-});
+  target: 'serverless'
+};
