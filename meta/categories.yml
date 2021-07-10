@@ -2,19 +2,16 @@ categories:
   - slug: bookmark
     name: bookmark
     color: "#EDBCDD"
-    img: "/og_image.png"
-
+    img: /images/img_2976.jpg
   - slug: pillow
     name: pillow
     color: "#e5db7e"
-    img: "/og_image.png"
-
+    img: /images/img_5886.jpg
   - slug: nursery
     name: nursery
     color: "#3578E0"
-    img: "/og_image.png"
-
+    img: /images/img_9107.jpg
   - slug: banner
     name: banner
     color: "#eef5f5"
-    img: "/og_image.png"
+    img: /images/img_9521.jpg
