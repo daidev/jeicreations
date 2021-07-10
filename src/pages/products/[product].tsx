@@ -31,7 +31,7 @@ const externalComponents = {
 }
 const components = { 
   ...externalComponents,
-  h2: (props) => <Typography variant="h2" {...props} />
+  // h2: (props) => <Typography variant="h2" {...props} />
 };
 
 const ProductPage = ({ source }) => {
@@ -67,7 +67,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.product as string;
-  console.log({ slug });
   const product = fetchProduct(slug);
   const { content, ...data } = product || { content: "" };
   const source = await renderToString(content, { components, scope: data as any });

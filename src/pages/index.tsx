@@ -152,7 +152,7 @@ const Categories = () => {
                     objectPosition="center"
                   /> */}
                   <Box p={0} marginTop={2}>
-                    <Link href={{ pathname: 'products', query: { category: slug }}}>
+                    <Link href={{ pathname: 'products', query: { category: slug }}} passHref>
                       <Typography
                         variant="overline"
                         align="center"

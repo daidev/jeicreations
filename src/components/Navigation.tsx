@@ -64,7 +64,7 @@ export default function Navigation() {
     <nav className={css.nav}>
       <ul className={css.list}>
         <li className={clsx(css.listItem, {[css.active]: router.pathname === "/" } )}>
-          <Link href="/" as="/">
+          <Link href="/" as="/" passHref>
             <Typography
               variant="body1"
               className={css.item}
@@ -75,7 +75,7 @@ export default function Navigation() {
           <PenCircle className={css.circle}/>
         </li>
         <li className={clsx(css.listItem, {[css.active]: router.pathname.startsWith("/products") } )}>
-          <Link href="/products">
+          <Link href="/products" passHref>
             <Typography
               variant="body1"
               className={css.item}
@@ -86,7 +86,7 @@ export default function Navigation() {
           <PenCircle className={css.circle}/>
         </li>
         <li className={clsx(css.listItem, {[css.active]: router.pathname.startsWith("/posts") } )}>
-          <Link href="/posts">
+          <Link href="/posts" passHref>
             <Typography
               variant="body1"
               className={css.item}

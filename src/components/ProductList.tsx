@@ -106,8 +106,9 @@ const CategoryProducts = ({ color, name, products, index }) => {
   )
 }
 
-export default function ProductList({ filters = {} }) {
+export default function ProductList({ filters }) {
   const css = useStyles();
+  console.log({ filters });
   const { pathname, push } = useRouter();
   const [selectedFilters, setSelectedFilters] = useState(filters || INITIAL_FILTERS);
   const { loading, products: productsByCategories } = useProductsByCategory(selectedFilters);
@@ -153,6 +154,7 @@ export default function ProductList({ filters = {} }) {
       ) : Object.entries(productsByCategories).map(([category, products], index) => (
         <CategoryProducts
           {...getCategory(category)}
+          key={category}
           products={products}
           index={index}
         />

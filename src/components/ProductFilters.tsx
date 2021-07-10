@@ -19,7 +19,7 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={selectedFilters.category.includes(slug)}
+                          checked={selectedFilters.category && selectedFilters.category.includes(slug)}
                           onChange={({ target: { name }}) => {
                             updateFilters('category', name);
                           }}
@@ -44,7 +44,7 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
                     <FormControlLabel
                       control={
                         <Checkbox
-                        checked={selectedFilters.colors.includes(name)}
+                        checked={selectedFilters.colors && selectedFilters.colors.includes(name)}
                           onChange={({ target: { name }}) => {
                             updateFilters('colors', name);
                           }}
@@ -69,7 +69,7 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
                     <FormControlLabel
                       control={
                         <Checkbox
-                        checked={selectedFilters.materials.includes(name)}
+                        checked={selectedFilters.materials && selectedFilters.materials.includes(name)}
                           onChange={({ target: { name }}) => {
                             updateFilters('materials', name);
                           }}

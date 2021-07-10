@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react'
+import { listCategories } from '../lib/categories';
 
 
 export default function useCategories(): {
@@ -12,12 +13,14 @@ export default function useCategories(): {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/api/categories')
-      .then(res => res.json())
-      .then(res => {
-        setResults(res)
-        setLoading(false);
-      })
+    // fetch('/api/categories')
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     setResults(res)
+    //     setLoading(false);
+    //   })
+    setResults(listCategories())
+    setLoading(false);
   }, []);
 
   function getCategory(category) {
