@@ -73,7 +73,7 @@ const ProductCard = ({ img, title, color }) => {
         classNames={css.productCard}
         density={30}
       >
-        {/* <Image src={img} height={150} width={300} /> */}
+        <Image src={img} height={150} width={300} />
         <Box p={0} marginTop={2}>
           <Typography
             variant="overline"

@@ -23,13 +23,13 @@ export default function Hero() {
       textAlign="center"
       display="flex"
     >
-      {/* <Image
+      <Image
         height="332"
         width="730"
         src="/LogoIllustration.png"
         alt="Logo"
         objectPosition="center"
-      /> */}
+      />
       {/* <SocialList /> */}
     </Box>
   )
