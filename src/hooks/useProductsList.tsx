@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { fetchProducts } from '../lib/products';
 
 const searchEndpoint = ({ category, colors, materials }) => {
   const query = new URLSearchParams({ category, colors, materials })
@@ -12,14 +11,12 @@ export default function useProductsList(filters) {
 
   useEffect(() => {
     setLoading(true);
-    // fetch(searchEndpoint(filters))
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     setResults(res)
-    //     setLoading(false);
-    //   })
-    setResults(fetchProducts(filters));
-    setLoading(false);
+    fetch(searchEndpoint(filters))
+      .then(res => res.json())
+      .then(res => {
+        setResults(res)
+        setLoading(false);
+      })
   }, [filters]);
 
   return {
