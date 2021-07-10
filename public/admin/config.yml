@@ -89,8 +89,16 @@ collections:
                 widget: "string"
                 hint: "First and Last"
               - label: "Color"
-                name: "Color"
-                widget: "text"
+                name: "color"
+                widget: "color"
+              - label: "Image"
+                name: "img"
+                widget: "image"
+                choose_url: true
+                default: "/og_image.png"
+                media_library:
+                  config:
+                    multiple: true
 
       - name: "tags"
         label: "Tags"
@@ -201,6 +209,15 @@ collections:
           displayFields:
             - "categories.*.name"
           valueField: "categories.*.slug"
+      - label: "Images"
+        name: "images"
+        widget: "image"
+        choose_url: true
+        default: "/og_image.png"
+        media_library:
+          config:
+            multiple: true
+
       - label: "Body"
         name: "body"
         widget: "markdown"
